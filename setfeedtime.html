@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Feed Time</title>
+    <link rel="stylesheet" href="setfeedtime.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Candal&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Heading -->
+        <h1>SET FEED TIME</h1>
+
+        <!-- Clock and Buttons -->
+        <form id="feedTimeForm">
+            <!-- Date Selection -->
+            <label for="feedDate">Select Feeding Date:</label>
+            <input type="date" id="feedDate" name="feedDate" required>
+
+            <!-- Time Picker -->
+            <div class="time-picker">
+                <div class="time-picker-row">
+                    <!-- Hour -->
+                    <div>
+                        <label for="feedHour">Hour</label>
+                        <select id="feedHour" name="feedHour">
+                            <option value="12">12</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                        </select>
+                    </div>
+
+                    <!-- Minute -->
+                    <div>
+                        <label for="feedMinute">Minute</label>
+                        <select id="feedMinute" name="feedMinute">
+                            <script>
+                                for (let i = 0; i < 60; i++) {
+                                    const value = i < 10 ? `0${i}` : i; // Add leading zero for single digits
+                                    document.write(`<option value="${value}">${value}</option>`);
+                                }
+                            </script>
+                        </select>
+                    </div>
+
+                    <!-- AM/PM -->
+                    <div>
+                        <label for="feedAmPm">AM/PM</label>
+                        <select id="feedAmPm" name="feedAmPm">
+                            <option value="AM">AM</option>
+                            <option value="PM">PM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" form="feedTimeForm">Save</button>
+                <button type="button" onclick="location.href='index.html'">Back</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('feedTimeForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get selected date and time
+            const feedDate = document.getElementById('feedDate').value;
+            const feedHour = document.getElementById('feedHour').value;
+            const feedMinute = document.getElementById('feedMinute').value;
+            const feedAmPm = document.getElementById('feedAmPm').value;
+
+            // Validate date and time
+            if (!feedDate) {
+                alert('Please select a valid date.');
+                return;
+            }
+
+            const feedTime = `${feedHour}:${feedMinute} ${feedAmPm}`;
+
+            // Save the feeding schedule to `scheduledTimes` (for index.html)
+            const scheduledTime = { date: feedDate, time: feedTime };
+            const scheduledTimes = JSON.parse(localStorage.getItem('scheduledTimes')) || [];
+            scheduledTimes.push(scheduledTime);
+            localStorage.setItem('scheduledTimes', JSON.stringify(scheduledTimes));
+
+            // Also save the feeding schedule to `foodLogs` (for database.html)
+            const foodLogs = JSON.parse(localStorage.getItem('foodLogs')) || [];
+            foodLogs.push(scheduledTime);
+            localStorage.setItem('foodLogs', JSON.stringify(foodLogs));
+
+            location.href = 'index.html'; // Redirect to the main page
+        });
+    </script>
+</body>
+</html>

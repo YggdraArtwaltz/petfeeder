@@ -1,0 +1,143 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Candal', Arial, sans-serif;
+    background: linear-gradient(to bottom, #FFFAF0, #FFE4E1); /* Soft pastel gradient */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container Styles */
+.container {
+    background: #FFF;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for a modern look */
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out; /* Add a fade-in animation */
+}
+
+/* Header Styles */
+h1 {
+    font-family: 'Bowlby One', cursive;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Button Styles */
+.action-button {
+    font-family: 'Bowlby One', cursive;
+    font-size: 18px;
+    padding: 12px 20px;
+    color: black; /* Black text for better readability */
+    background-color: #FFB6C1; /* Soft pink background */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px;
+}
+
+.action-button:hover {
+    background-color: #FF69B4; /* Slightly darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.action-button:active {
+    transform: scale(0.95); /* Slightly shrink the button on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow on click */
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
+}
+
+thead {
+    background-color: #FFB6C1; /* Soft pink header */
+    color: white;
+}
+
+thead th {
+    padding: 12px 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Slightly darker gray on hover */
+}
+
+tbody td {
+    padding: 12px 15px;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        max-width: 90%; /* Adjust container width for smaller screens */
+    }
+
+    h1 {
+        font-size: 24px; /* Adjust header font size for mobile */
+    }
+
+    .action-button {
+        font-size: 16px; /* Adjust button font size for mobile */
+        padding: 10px 15px; /* Adjust button padding for mobile */
+    }
+
+    table {
+        font-size: 14px; /* Adjust table font size for mobile */
+    }
+}

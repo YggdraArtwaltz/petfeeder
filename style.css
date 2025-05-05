@@ -1,0 +1,284 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Candal', Arial, sans-serif; /* Default font for the body */
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #FFFAF0, #FFE4E1); /* Soft pastel gradient */
+}
+
+/* Header Styles */
+h1, h2 {
+    font-family: 'Bowlby One', cursive; /* Apply Bowlby One font to headers */
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+/* Clock Canvas */
+#canvasClock {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border: 5px solid #FFB6C1;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #FFF;
+}
+
+/* Buttons */
+button {
+    font-family: 'Bowlby One', cursive; /* Apply Bowlby One font to buttons */
+    margin: 10px auto;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background-color: #FFB6C1;
+    color: black; /* Set button text color to black */
+    cursor: pointer;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #FF69B4;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Delete Button */
+.delete-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: black; /* Set delete button text color to black */
+    background-color: #FF6B6B;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #FF4C4C;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Clock and Buttons Container */
+.clock-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Scheduled Food Section */
+.scheduled-food-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.scheduled-food-container h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: 'Candal', Arial, sans-serif; /* Apply Candal font to section headers */
+}
+
+.scheduled-food-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scheduled-food-container li {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout */
+.container {
+    display: flex;
+    flex-direction: column; /* Default to vertical layout */
+    align-items: center; /* Center all child elements horizontally */
+    justify-content: center; /* Center the content vertically */
+    gap: 20px; /* Space between elements */
+    width: 100%; /* Ensure the container spans the full width */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: #FFB6C1; /* Soft pink background */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Bowlby One', cursive;
+    transition: left 0.3s ease; /* Smooth slide-in effect */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+    align-items: flex-start; /* Align items to the left */
+}
+
+.sidebar.open {
+    left: 0; /* Slide in when open */
+}
+
+.sidebar h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #FF69B4; /* Slightly darker pink on hover */
+    color: white;
+}
+
+/* Toggle Icon */
+.toggle-icon {
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    position: fixed;
+    top: 20px; /* Add space from the top */
+    left: 20px; /* Add space from the left */
+    background: none; /* Remove the pink background */
+    border: none; /* Remove the border */
+    padding: 0; /* Remove padding */
+    z-index: 1100; /* Ensure it appears above the sidebar */
+    transition: transform 0.3s ease;
+}
+
+.toggle-icon:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 0; /* No margin when sidebar is hidden */
+    padding: 20px;
+    font-family: 'Candal', Arial, sans-serif;
+    transition: margin-left 0.3s ease; /* Smooth transition when sidebar opens */
+}
+
+.sidebar.open ~ .main-content {
+    margin-left: 250px; /* Shift content when sidebar is open */
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+    #canvasClock {
+        max-width: 200px; /* Smaller clock for mobile */
+    }
+
+    button {
+        padding: 12px 25px; /* Adjust padding for smaller screens */
+        font-size: 16px; /* Adjust font size for smaller screens */
+        max-width: 200px; /* Ensure buttons fit on smaller screens */
+    }
+
+    .button-container {
+        gap: 10px; /* Reduce gap between buttons for smaller screens */
+    }
+
+    .container {
+        align-items: center; /* Ensure content is centered horizontally */
+        gap: 15px; /* Reduce gap for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%; /* Sidebar covers the entire screen on mobile */
+        left: -100%; /* Initially hidden */
+    }
+
+    .sidebar.open {
+        left: 0; /* Slide in from the left */
+    }
+
+    .main-content {
+        margin-left: 0; /* No margin shift on mobile */
+    }
+
+    .toggle-icon {
+        top: 10px; /* Adjust position for smaller screens */
+        left: 10px; /* Keep it on the left */
+    }
+}

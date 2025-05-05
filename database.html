@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Logs</title>
+    <link rel="stylesheet" href="database.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Candal&display=swap" rel="stylesheet">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out; /* Fade-in animation for modal */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            font-family: "Candal", sans-serif; /* Ensure consistent font for modal content */
+            animation: slideDown 0.4s ease-in-out; /* Slide-down animation for modal content */
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-family: "Candal", sans-serif; /* Ensure consistent font for the heading */
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: "Candal", sans-serif; /* Ensure consistent font for all buttons */
+            transition: transform 0.2s ease, background-color 0.3s ease; /* Add hover animation */
+        }
+
+        .modal-buttons .confirm {
+            background-color: #FF6347; /* Tomato color */
+            color: white;
+        }
+
+        .modal-buttons .cancel {
+            background-color: #ccc;
+            color: black;
+        }
+
+        .modal-buttons button:hover {
+            transform: scale(1.1); /* Slightly enlarge button on hover */
+            opacity: 0.9;
+        }
+
+        /* Table Row Animation */
+        tbody tr {
+            animation: fadeIn 0.5s ease-in-out; /* Fade-in animation for table rows */
+        }
+
+        /* Button Animation */
+        .action-button {
+            transition: transform 0.2s ease, background-color 0.3s ease; /* Add hover animation */
+        }
+
+        .action-button:hover {
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #FF69B4; /* Change color on hover */
+        }
+
+        /* Page Transition Animation */
+        .fade-out {
+            animation: fadeOut 0.5s ease-in-out forwards; /* Fade-out animation */
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Logs</h1>
+
+        <!-- Table to Display Data -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button class="action-button" onclick="printLogs()">Print</button>
+            <button class="action-button" onclick="showDeleteModal()">Delete All Logs</button>
+            <button class="action-button" onclick="navigateToIndex()">Back</button>
+        </div>
+    </div>
+
+    <!-- Modal for Delete Confirmation -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h2>Are you sure you want to delete all food logs?</h2>
+            <div class="modal-buttons">
+                <button class="confirm" onclick="confirmDeleteLogs()">Yes</button>
+                <button class="cancel" onclick="closeDeleteModal()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadFoodLogs);
+
+        // Function to load food logs from localStorage
+        function loadFoodLogs() {
+            const foodLogs = JSON.parse(localStorage.getItem('foodLogs')) || [];
+            const dataTable = document.getElementById('dataTable').querySelector('tbody');
+            dataTable.innerHTML = ''; // Clear the table
+
+            if (foodLogs.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="3" style="text-align: center;">No food logs available</td>
+                `;
+                dataTable.appendChild(row);
+            } else {
+                foodLogs.forEach((log, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${log.date}</td>
+                        <td>${log.time}</td>
+                    `;
+                    dataTable.appendChild(row);
+                });
+            }
+        }
+
+        // Function to print the logs
+        function printLogs() {
+            const originalContent = document.body.innerHTML;
+            const printContent = document.querySelector('.container').innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+        }
+
+        // Show the delete confirmation modal
+        function showDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'flex';
+        }
+
+        // Close the delete confirmation modal
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').style.display = 'none';
+        }
+
+        // Confirm delete all logs
+        function confirmDeleteLogs() {
+            localStorage.removeItem('foodLogs'); // Remove logs from localStorage
+            loadFoodLogs(); // Refresh the table
+            closeDeleteModal(); // Close the modal
+        }
+
+        // Navigate to index.html with animation
+        function navigateToIndex() {
+            document.body.classList.add('fade-out'); // Add fade-out animation
+            setTimeout(() => {
+                location.href = 'index.html'; // Redirect to the main page
+            }, 500); // Match the duration of the fade-out animation
+        }
+    </script>
+</body>
+</html>

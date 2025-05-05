@@ -1,0 +1,172 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Candal', Arial, sans-serif; /* Default font for the body */
+    background: linear-gradient(to bottom, #FFFAF0, #FFE4E1); /* Soft pastel gradient */
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Add padding around the body */
+}
+
+/* Container Styles */
+.container {
+    background: #FFF;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Limit the container width */
+    width: 100%; /* Make it responsive */
+    margin: 20px; /* Add space around the container */
+    text-align: center;
+}
+
+/* Header Styles */
+h1 {
+    font-family: 'Bowlby One', cursive; /* Apply Bowlby One font to the header */
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Add spacing between form elements */
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+    text-align: left;
+}
+
+input[type="date"], select, input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFF;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="date"]:focus, select:focus, input[type="text"]:focus {
+    border-color: #FFB6C1;
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    font-family: 'Bowlby One', cursive; /* Apply Bowlby One font to buttons */
+    padding: 12px 20px;
+    font-size: 16px;
+    color: black; /* Set button text color to black */
+    background-color: #FFB6C1; /* Soft pink background */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #FF69B4; /* Slightly darker pink on hover */
+}
+
+button:active {
+    transform: scale(0.95); /* Add a press effect */
+}
+
+/* Time Picker Styles */
+.time-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.time-picker-row {
+    display: flex;
+    flex-direction: row; /* Keep dropdowns horizontal */
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping if space is limited */
+}
+
+.time-picker-row div {
+    flex: 1;
+    text-align: center;
+    min-width: 100px; /* Ensure dropdowns have a minimum width */
+}
+
+.time-picker-row label {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 5px; /* Add spacing between label and dropdown */
+}
+
+.time-picker select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #FFF;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* Center text inside dropdowns */
+    width: 100%; /* Make dropdowns responsive */
+}
+
+.time-picker select:focus {
+    border-color: #FFB6C1;
+    box-shadow: 0 0 8px rgba(255, 182, 193, 0.5);
+    outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        max-width: 90%; /* Adjust container width for smaller screens */
+    }
+
+    h1 {
+        font-size: 24px; /* Adjust header font size for mobile */
+    }
+
+    label {
+        font-size: 14px; /* Adjust label font size for mobile */
+    }
+
+    select, input[type="text"], input[type="date"] {
+        font-size: 14px; /* Adjust input font size for mobile */
+    }
+
+    button {
+        font-size: 14px; /* Adjust button font size for mobile */
+        padding: 10px 15px; /* Adjust button padding for mobile */
+    }
+
+    .time-picker-row {
+        flex-direction: row; /* Keep dropdowns horizontal */
+        gap: 10px;
+    }
+
+    .time-picker-row div {
+        flex: 1;
+        min-width: 80px; /* Ensure dropdowns fit on smaller screens */
+    }
+}

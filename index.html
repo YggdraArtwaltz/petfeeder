@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Clock</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Candal&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="toggle-icon" id="toggleIcon">&#9776;</div> <!-- Hamburger Icon -->
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="database.html">Data Logs</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Clock and Buttons Container -->
+            <div class="clock-buttons-container">
+                <canvas id="canvasClock" width="300" height="300"></canvas>
+                <div class="button-container">
+                    <button id="dispense">DISPENSE</button>
+                    <button id="setFeedTime" onclick="location.href='setfeedtime.html'">SET FEED TIME</button>
+                </div>
+            </div>
+
+            <!-- Scheduled Food Section -->
+            <div class="scheduled-food-container">
+                <h2>Scheduled Food for Rabbit</h2>
+                <ul id="scheduledFoodList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Scripts -->
+    <script src="sidebar.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Inline Script: Load Scheduled Times -->
+    <script>
+        document.addEventListener('DOMContentLoaded', loadScheduledTimes);
+
+        function loadScheduledTimes() {
+            const scheduledTimes = JSON.parse(localStorage.getItem('scheduledTimes')) || [];
+            const scheduledFoodList = document.getElementById('scheduledFoodList');
+            scheduledFoodList.innerHTML = '';
+
+            scheduledTimes.forEach((time, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${time.date} at ${time.time}`;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteScheduledTime(index);
+
+                listItem.appendChild(deleteButton);
+                scheduledFoodList.appendChild(listItem);
+            });
+        }
+
+        function deleteScheduledTime(index) {
+            const scheduledTimes = JSON.parse(localStorage.getItem('scheduledTimes')) || [];
+            scheduledTimes.splice(index, 1);
+            localStorage.setItem('scheduledTimes', JSON.stringify(scheduledTimes));
+            loadScheduledTimes();
+        }
+    </script>
+</body>
+</html>
